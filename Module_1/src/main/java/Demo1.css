@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    /*100%高度*/
+    height: 100vh;  /*1vh就是当前屏幕可见高度的1%*;height:100vh == height:100%;同理vw就是当前屏幕宽度的1%*/
+    /*弹性布局*/
+    display: flex;  /*Flex是Flexible Box的缩写，意为"弹性布局"*/
+    justify-content: center;    /*justify-content属性定义了项目在主轴上的对齐方式，是flex的一个属性*/
+    align-items: center;    /*align-items属性定义项目在交叉轴上如何对齐,也是flex的一个属性*/
+    /*渐变色背景*/
+    background: linear-gradient(to top,#1e3c72,#2a5298);    /*linear-gradient(颜色朝向，第一个颜色结束，第二个颜色开始，第二个颜色结束，第三个颜色开始，第三个颜色结束，第四个颜色开始)*/
+}
+.loader{
+   width: 125px;
+    /*相对定位*/
+    position: relative;
+    /*设置视距*/
+    perspective: 200px;
+}
+.loader::before,
+.loader::after{
+    content: "";
+    width: 50px;
+    height: 50px;
+    background-color: transparent;  /*默认透明背景色*/
+    /*绝对定位*/
+    position: absolute;
+    /*执行动画：动画名 时长 慢速开始慢速结束中间加快 无限次播放 来回轮流*/
+    animation: jumping 0.5s ease infinite alternate;
+}
+.loader::before{
+    left: 0;
+}
+.loader::after{
+    right: 0;
+    /*在这里设置一个动画延迟*/
+    animation-delay: 0.15s;
+}
+
+/*定义动画*/
+/*keyframes关键帧（计算机动画术语）;所以@keyframes就比较好理解了，它是来定义css动画中的关键帧的*/
+@keyframes jumping {
+    0%{
+        transform: scale(1) translateY(0) rotateX(0);   /*transform(变形)三大属性：rotate(旋转) scale(缩放) translate(移动)*/
+        box-shadow: 0 0 0 transparent;  /*transparent 它代表着全透明黑色*/
+    }
+    100%{
+        background-color: #ffffff;
+        transform: scale(1.2) translateY(-50px) rotateX(45deg);   /*transform(变形)三大属性：rotate(旋转) scale(缩放) translate(移动)*/
+        box-shadow: 0 55px 100px #ffffff;  /*transparent 它代表着全透明黑色*/
+    }
+
+}
